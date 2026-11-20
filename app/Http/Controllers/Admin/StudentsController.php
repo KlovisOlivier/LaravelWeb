@@ -15,7 +15,7 @@ class StudentsController extends Controller
         $students = Students::with('classroom')->get();
         $classrooms = Classroom::query()->get();
 
-        return view('admin.student.index', compact(
+        return view('admin.students.index', compact(
             'title',
             'students',
             'classrooms'
@@ -45,7 +45,7 @@ class StudentsController extends Controller
         Students::create($validated);
 
         return redirect()
-            ->route('admin.student.index')
+            ->route('admin.students.index')
             ->with('success', 'Data siswa berhasil ditambahkan.');
     }
 }
