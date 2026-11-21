@@ -19,6 +19,12 @@
                 </div>
             @endif
 
+            @if ($errors->has('subject_id'))
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    {{ $errors->first('subject_id') }}
+                </div>
+            @endif
+
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row items-center justify-end space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <button type="button" data-modal-target="createTeacherModal" data-modal-toggle="createTeacherModal"
@@ -54,6 +60,5 @@
             </div>
         </div>
     </section>
-
     @include('admin.teacher.create')
 </x-admin.layout>

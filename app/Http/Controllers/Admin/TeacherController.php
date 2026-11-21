@@ -27,7 +27,7 @@ class TeacherController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'niy' => 'required|numeric|unique:teachers,niy',
-            'subject_id' => 'required|exists:subjects,id',
+            'subject_id' => 'required|exists:subjects,id|unique:teachers,subject_id',
             'start_date' => 'required|date',
         ], [
             'name.required' => 'Nama guru wajib diisi.',
@@ -36,6 +36,7 @@ class TeacherController extends Controller
             'niy.unique' => 'NIY sudah digunakan.',
             'subject_id.required' => 'Mata pelajaran wajib dipilih.',
             'subject_id.exists' => 'Mata pelajaran tidak ditemukan.',
+            'subject_id.unique' => 'Mata pelajaran sudah diajarkan oleh guru lain.',
             'start_date.required' => 'Tanggal mulai mengajar wajib diisi.',
         ]);
 
