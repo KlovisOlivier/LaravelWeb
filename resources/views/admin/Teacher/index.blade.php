@@ -2,7 +2,6 @@
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
             
-            <!-- Judul dipindahkan ke dalam container & memakai warna adaptif Tailwind -->
             <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-5">
                 {{ $title }}
             </h1>
@@ -10,18 +9,6 @@
             @if (session('success'))
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
                     {{ session('success') }}
-                </div>
-            @endif
-
-            @if ($errors->has('niy'))
-                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                    {{ $errors->first('niy') }}
-                </div>
-            @endif
-
-            @if ($errors->has('subject_id'))
-                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                    {{ $errors->first('subject_id') }}
                 </div>
             @endif
 
