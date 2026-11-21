@@ -7,9 +7,9 @@ class AboutController extends Controller
     public function index()
     {
         $title = 'About Me';
-        $nama = 'Nama : Giga Wahyu Aditya';
-        $kelas = 'Kelas : XI PPLG 1';
-        $hobby = 'Hobby : Bermain Game';
+        $nama = 'Giga Wahyu Aditya';
+        $kelas = 'XI PPLG 1';
+        $hobby = 'Bermain Game';
         $repository = 'Akun repository : ';
 
         return view('admin.about', [

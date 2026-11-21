@@ -1,43 +1,67 @@
 <x-admin.layout>
-    <h1 style="color: rgb(4, 4, 4); font-size:40px">{{ $title }}</h1>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
 
+            {{-- Header --}}
+            <div class="flex flex-col md:flex-row items-center justify-between pb-4 space-y-3 md:space-y-0">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                    {{ $title }}
+                </h1>
+
+                <button type="button"
+                    data-modal-target="createSubjectModal"
+                    data-modal-toggle="createSubjectModal"
+                    class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                    </svg>
+                    Tambah Mata Pelajaran
+                </button>
+            </div>
+
+            {{-- Alert Success --}}
             @if (session('success'))
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
                     {{ session('success') }}
                 </div>
             @endif
 
+            {{-- Table Card --}}
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                <div class="flex flex-col md:flex-row items-center justify-end space-y-3 md:space-y-0 md:space-x-4 p-4">
-                    <button type="button" data-modal-target="createSubjectModal" data-modal-toggle="createSubjectModal"
-                        class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        + Tambah Mata Pelajaran
-                    </button>
-                </div>
-
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 py-3">No</th>
-                                <th scope="col" class="px-4 py-3">Subject Name</th>
-                                <th scope="col" class="px-4 py-3">Teacher</th>
+                                <th scope="col" class="px-6 py-3 w-16">No</th>
+                                <th scope="col" class="px-6 py-3">Subject Name</th>
+                                <th scope="col" class="px-6 py-3">Teacher</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($subjects as $subject)
-                                <tr class="border-b dark:border-gray-700">
-                                    <td class="px-4 py-3">{{ $loop->iteration }}</td>
-                                    <td class="px-4 py-3">{{ $subject->name }}</td>
-                                    <td class="px-4 py-3">{{ $subject->teacher->name ?? '-' }}</td>
+                            @forelse ($subjects as $subject)
+                                <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition">
+                                    <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                                        {{ $subject->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $subject->teacher->name ?? '-' }}
+                                    </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                        Belum ada data mata pelajaran.
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
+
         </div>
     </section>
 

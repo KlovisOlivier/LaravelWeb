@@ -11,7 +11,7 @@ class ClassroomController extends Controller
     public function index()
     {
         $title = "Classroom Data";
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::with('students')->get();
 
         return view('admin.classroom.index', compact(
             'title',
